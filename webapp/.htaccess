@@ -1,0 +1,20 @@
+<filesMatch ".(.*)$">
+Header set Content-Security-Policy: "default-src 'self'; base-uri 'self'; script-src 'unsafe-inline'  'self'; object-src 'none'; frame-ancestors 'none'; style-src 'unsafe-inline' 'self';"
+Header set Feature-Policy: "geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none';"
+Header set Referrer-Policy: "same-origin"
+Header set Strict-Transport-Security: "max-age=16070400; includeSubDomains"
+Header set X-Content-Type-Options: nosniff
+</filesMatch>
+
+<filesMatch ".(css)$">
+Header set Content-Type "text/css; charset=iso-8859-1"
+</filesMatch>
+
+<filesMatch ".(js)$">
+Header set Content-Type "application/javascript; charset=iso-8859-1"
+</filesMatch>
+
+# Some assets cached for 1 month
+<filesMatch ".(css|svg|ttf|js)$">
+Header set Cache-Control "max-age=2628000, public"
+</filesMatch>

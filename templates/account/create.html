@@ -1,0 +1,35 @@
+{% extends "includes/layout.html" %}
+{% block title %}Create an Account{% endblock %}
+
+{% block content %}
+
+
+<p>Please create an account. It is recommended to save your account information in a password manager.</p>
+
+{{ include('includes/errors.html') }}
+
+<div id='password-check-container' role="alert" aria-atomic="true"></div>
+
+<form action="create.php" method="post" accept-charset="iso-8859-1">
+
+<label for="Email">Email address</label>
+<input name="Email" id="Email" type="email" /><br />
+
+<label for="Password">Password</label>
+<input name="Password" id="Password" type="password" autocomplete="off" /><br />
+
+<input name="PasswordScore" id="PasswordScore" type="hidden" /><br />
+
+<button type="submit" id="CreateAccount" value="CreateAccount">Create Account</button>
+</form>
+
+<p>
+	<a href="login.php">Already have an account?</a> | <a href="requestreset.php">Forgot password?</a>
+</p>
+
+
+{% endblock content %}
+
+{% block morejs %}
+<script language="javascript" type="text/javascript" src="{{ base }}js/check-password.js?{{ CacheBuster }}"></script>
+{% endblock morejs %}

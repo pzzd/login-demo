@@ -50,7 +50,7 @@ The form has three inputs, Email and Password, PasswordScore.
 
 Upon submitting, ID, CreateDate, Email, HashedPassword, ConfirmationKey are saved to the database. Any existing unconfirmed accounts with the same email address are deleted in the database. 
 
-A line is added to the log: `{"event": "user_created:anonymous,[Email],unconfirmed_applicant", "level": "INFO", "description": "[Email] created an account."}`
+A line is added to the log: `{"event": "user_created:anonymous,[Email],unconfirmed_account", "level": "INFO", "description": "[Email] created an account."}`
 
 An email confirmation is sent to the email address with a link containing ConfirmationKey to confirm the address. 
 
@@ -69,7 +69,7 @@ If the user arrives with a good link (e.g, the key exists in the database), the 
 There is a form with two inputs: Email and Password. The validation is:
 - The confirmation key in session matches this email address's key in the database.
 
-Upon submitting, ConfirmationDate and IsActive are saved.  A line is added to the log: `{"event": "authz_change:[Email],unconfirmed_applicant,confirmed_applicant", "level": "INFO", "description": "[Email] confirmed their account."}` Now any other data in other tables can be associated with this account.
+Upon submitting, ConfirmationDate and IsActive are saved.  A line is added to the log: `{"event": "authz_change:[Email],unconfirmed_account,confirmed_account", "level": "INFO", "description": "[Email] confirmed their account."}` Now any other data in other tables can be associated with this account.
 
 An email confirmation is sent to the email address saying the account has been activated. A line is added to the log: `{"event": "email_sent:[Email]", "level": "INFO", "description": "[Email] was sent the ‘[Subject]’ email.”}`
 

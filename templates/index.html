@@ -1,0 +1,26 @@
+{% extends "includes/layout.html" %}
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+
+
+<p>
+Thanks for trying out my account creation and login demo app. <a href="account/create.php">Please create an account.</a>
+</p>
+
+
+
+<div>
+	<form action="account/login.php" method="post">
+		<fieldset>
+			<legend><strong>Login</strong></legend>
+			<label for="Email">Email Address:</label> <input name="Email" id="Email" type="text" /><br />
+			<label for="Password">Password:</label> <input name="Password" id="Password" type="password" autocomplete="off" /><br />
+			<input type="submit" value="Login" class="index-login-submit" id="IndexLogin"/> <br />
+			<a href="account/requestreset.php">Forgot your password?</a>
+		</fieldset>
+	</form>
+</div>
+
+{% endblock content %}

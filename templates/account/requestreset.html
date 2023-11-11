@@ -1,0 +1,19 @@
+{% extends "includes/layout.html" %}
+{% block title %}Reset Your Password{% endblock %}
+
+{% block content %}
+
+<p>Submit your email address below to receive instructions on resetting your password.</p>
+
+{{ include('includes/errors.html') }}
+
+<form action="requestreset.php" method="post" accept-charset="iso-8859-1">
+
+<label for="Email">Email address</label>
+<input name="Email" id="Email" type="email" /><br />
+
+<button type="submit" id="RequestReset" value="RequestReset">Submit</button>
+</form>
+
+{% endblock content %}
+

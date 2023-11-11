@@ -1,0 +1,72 @@
+{
+    "name": "pzzd/login-demo",
+    "description": "Demonstration app for account creation and login",
+    "license": "proprietary",
+    "repositories": {
+	"jquery": {
+		"type": "package",
+		"package": {
+			"name" : "jquery/jquery",
+			"version": "1.7.1",
+			"dist": {
+				"url": "https://github.com/jquery/jquery/archive/refs/tags/1.7.1.zip",
+				"type": "zip"
+			}
+		}
+	},
+	"zxcvbn-core":{ "type": "package",
+		"package": { 
+			"name": "zxcvbn/core",
+			"version": "2.0.0",
+			"dist": {
+				"url":"https://cdn.jsdelivr.net/npm/@zxcvbn-ts/core@2.0.0/dist/zxcvbn-ts.js",
+				"type": "file"
+			}
+		}
+	},
+        "zxcvbn-lang-common":{ "type": "package",
+                "package": { 
+                        "name": "zxcvbn/language-common",
+                        "version": "2.0.0",
+                        "dist": {
+                                "url":"https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-common@2.0.0/dist/zxcvbn-ts.js",
+                                "type": "file"
+                        }
+                }
+        },
+        "zxcvbn-lang-en":{ "type": "package",
+                "package": {
+                        "name": "zxcvbn/language-en",
+                        "version": "2.0.0",
+                        "dist": {
+                                "url":"https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-en@2.0.0/dist/zxcvbn-ts.js",
+                                "type": "file"
+                        }
+                }
+        }	
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Pzzd\\LoginDemo\\": "classes"
+        } 
+    },
+    "require": {
+        "twig/twig": "3.*",
+        
+	"jquery/jquery": "1.7.1",
+	"zxcvbn/core": "2.0.0",
+	"zxcvbn/language-common": "2.0.0",
+	"zxcvbn/language-en": "2.0.0"
+    },
+
+    "scripts": {
+	"post-autoload-dump": [
+			"rm -rf webapp/vendor",
+			"mkdir webapp/vendor",
+			"mv vendor/jquery webapp/vendor/jquery",
+			"rm -rf webapp/vendor/jquery/jquery/test",
+			"mv vendor/zxcvbn webapp/vendor/zxcvbn"
+	]
+    }
+ }

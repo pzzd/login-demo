@@ -1,0 +1,44 @@
+{% extends "includes/layout.html" %}
+{% block title %}Choose A New Password{% endblock %}
+
+{% block content %}
+
+
+{% if keyerrors|length > 0 %}
+	{% set errors = keyerrors %}
+	{{ include('includes/errors.html') }}
+
+	<p>Please try the password-reset link in your email again, or contact <a href='mailto:{{ systemEmailAddress }}'>{{ systemEmailAddress }}</a> for assistance.</p>
+
+{% endif %}
+
+
+{% if keyerrors|length == 0 %}
+
+	<p>To reset your password, type in your email address and a new password. It is recommended to save your account information in a password manager.</p>
+	
+	{% set errors = reseterrors %}
+	{{ include('includes/errors.html') }}
+
+	<div id='password-check-container'></div>
+
+	<form action="reset.php" method="post" accept-charset="iso-8859-1">
+
+	<label for="Email">Email address</label>
+	<input name="Email" id="Email" type="email" /><br />
+
+	<label for="Password">New password</label>
+	<input name="Password" id="Password" type="password" autocomplete="off" /><br />
+
+	<input name="PasswordScore" id="PasswordScore" type="hidden" /><br />
+
+	<button type="submit" id="Reset" value="Reset">Save new password</button>
+	</form>
+
+{% endif %}
+
+{% endblock content %}
+
+{% block morejs %}
+<script language="javascript" type="text/javascript" src="{{ base }}js/check-password.js?{{ CacheBuster }}"></script>
+{% endblock morejs %}

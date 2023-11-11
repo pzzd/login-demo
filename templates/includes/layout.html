@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang='en-US'>
+<head>
+<title>{% block title %}{% endblock %} {% if block('title') is not empty %} | {% endif %}{{ WebAppName }} | Pzzd</title>
+<link rel="stylesheet" type="text/css" href="{{ base }}css/screen.css?{{ CacheBuster }}" media="screen" />
+
+<script language="javascript" type="text/javascript" src="{{ base }}vendor/jquery/jquery/jquery.js"></script>
+<script src="{{ base }}vendor/zxcvbn/core/zxcvbn-ts.js?{{ CacheBuster }}"></script>
+<script src="{{ base }}vendor/zxcvbn/language-common/zxcvbn-ts.js?{{ CacheBuster }}"></script>
+<script src="{{ base }}vendor/zxcvbn/language-en/zxcvbn-ts.js?{{ CacheBuster }}"></script>
+
+</head>
+
+<body>
+
+<div id="header" role="banner">
+		<h1>Login Demo</h1>
+</div>
+
+<a id="maincontent"></a>
+<div id="content">
+
+	{% block subnav %}{% endblock %}
+
+	<h3>{{ block('title') }}</h3>
+	{% block content %}{% endblock %}
+
+</div>
+
+</body>
+</html>
+
+{% block morejs %}{% endblock %}
+
+

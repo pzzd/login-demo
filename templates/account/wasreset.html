@@ -1,0 +1,21 @@
+{% extends "includes/layout.html" %}
+{% block title %}Your Password Was Reset{% endblock %}
+
+{% block content %}
+
+<p>Your password has been reset. Now you may log in with your new password.</p>
+
+<form action="login.php" method="post" accept-charset="iso-8859-1">
+<label for="Email">Email address</label>
+<input name="Email" id="Email" type="text" /><br />
+
+<label for="Password">Password</label>
+<input name="Password" id="Password" type="password" autocomplete="off" /><br />
+
+<input type="submit" id="Login" value="Login" class='button-without-label'/>
+</form>
+
+<p><a href="../newPassword.php">Forgot password?</a></p>
+
+
+{% endblock content %}
