@@ -118,8 +118,9 @@ class AccountDAO{
 			return ['There is a problem with the confirmation link.'];
 		}
 
-		$o;
-		/* TODO: Select accoutn with ['ConfirmationKey', $ConfirmationKey, ''] */
+		$query = "select * from tAccounts where ConfirmationKey = ?";
+		$params = [ $ConfirmationKey ];
+		$o = $this->get_account ($query, 's', $params);
 			
 		if (is_null($o))
 		{
@@ -170,9 +171,9 @@ class AccountDAO{
 			return $errors;
 		}	
 
-                $o;
-
-                /* TODO: Select account with ['Email', $Email, ''] */
+		$query = "select * from tAccounts where Email = ?";
+		$params = [ $Email ];
+		$o = $this->get_account ($query, 's', $params);
 
 		if (is_null($o))
 		{
@@ -210,9 +211,9 @@ class AccountDAO{
 
 	public function confirm ($Email, $ConfirmationKey)
 	{
-		$o;
-
-		/* TODO: seelct account confirmation with [$Email, $ConfirmationKey] */
+		$query = "select * from tAccounts where Email = ? and ConfirmationKey = ?";
+		$params = [ $Email, $ConfirmationKey ];
+		$o = $this->get_account ($query, 'ss', $params);
 
 		$this->info(
 			event: 'authz_change:'.$Email.',unconfirmed_account,confirmed_account',
@@ -224,12 +225,11 @@ class AccountDAO{
 	public function login($Email, $Password)
 	{
 		$query = "select * from tAccounts where Email = ? and IsActive = ?";
-		$params = [ $_POST['Email'], 1 ];
-		$db = $this->db();
-		$result = $db->execute_query($query, $params);
-		$row = $result->fetch_array(MYSQLI_ASSOC);
+		$params = [ $Email, 1];
+		$o = $this->get_account ($query, 'ss', $params);
 
-		if ($db->affected_rows == 0)
+
+		if (is_null($o)
 		{
 			$this->warn(
 				event: 'authn_login_fail:'.$Email,
@@ -256,9 +256,9 @@ class AccountDAO{
 			return $errors;
 		}
 
-		$o; 
-
-		/* TODO: select account with ['Email', $Email, ''] */
+		$query = "select * from tAccounts where Email = ?";
+		$params = [ $Email];
+		$o = $this->get_account ($query, 's', $params);
 
 		if (is_null($o))
 		{
@@ -292,9 +292,9 @@ class AccountDAO{
 			return $errors;
 		}
 
-		$o;
-
-		/* TODO: select account with ['PasswordResetKey', $PasswordResetKey, ''] */
+		$query = "select * from tAccounts where PasswordResetKey = ?";
+		$params = [ $PasswordResetKey];
+		$o = $this->get_account ($query, 's', $params);
 			
 		if (is_null($o))
 		{
@@ -330,9 +330,9 @@ class AccountDAO{
 			return $errors;
 		}
 
-		$o; 
-
-		/* TODO: select account with ['Email', $Email, ''] */
+		$query = "select * from tAccounts where Email = ?";
+		$params = [ $Email];
+		$o = $this->get_account ($query, 's', $params);
 
 		if (is_null($o))
 		{
@@ -355,9 +355,10 @@ class AccountDAO{
 
 	public function resetPassword (string $Email, string $HashedPassword, string $PasswordResetKey): Account
 	{
-		$o;
+		$query = "update tAccounts set HashedPassword = ?, PasswordResetDate = '2023-12-07', PasswordResetRequestDate = null, PasswordResetKey = null where Email = ? and PasswordResetKey = ?";
+		$params = [ $Email, $HashedPassword, $PasswordResetKey ];
+		$this->execute ($query, 'sss', $params);
 
-		/* TODO select pw reset with [$Email, $HashedPassword, $PasswordResetKey] */
 
 		$this->info(
 			event: 'authn_password_change:'.$Email,
