@@ -14,19 +14,18 @@
 
 <body>
 
-<div id="header" role="banner">
-		<h1>Login Demo</h1>
-</div>
+<header>
+	<h1>Login Demo</h1>
+</header>
 
-<a id="maincontent"></a>
-<div id="content">
+<main>
 
 	{% block subnav %}{% endblock %}
 
 	<h3>{{ block('title') }}</h3>
 	{% block content %}{% endblock %}
 
-</div>
+</main>
 
 </body>
 </html>

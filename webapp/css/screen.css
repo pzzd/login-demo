@@ -1,0 +1,18 @@
+body {
+	font-size: large;
+	font-family: Arial;
+}
+header {
+	background-color:  lightskyblue;
+	margin: -20px -10px 20px -10px;
+	padding-left: 50px;
+}
+
+input {
+	margin-bottom: 10px;
+}
+
+button {
+	padding: 10px;
+	font-size: medium;
+}
