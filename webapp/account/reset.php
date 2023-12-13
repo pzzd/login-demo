@@ -30,10 +30,8 @@ if (sizeof($_POST) > 0)
 	$PasswordResetKey = $_SESSION['PasswordResetKey'];
 	$PasswordScore = $_POST['PasswordScore'];
 
-	ws_exception_notrace_begin();
 	$PasswordLength = strlen($_POST['Password']);
 	$HashedPassword = password_hash($_POST['Password'], PASSWORD_ARGON2I);
-	ws_exception_notrace_end();
 
 	$reseterrors = $accountdao->validatePasswordReset($Email, $PasswordResetKey, $PasswordLength, $PasswordScore, $HashedPassword);
 

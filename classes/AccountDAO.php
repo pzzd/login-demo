@@ -215,6 +215,10 @@ class AccountDAO{
 
 	public function confirm ($Email, $ConfirmationKey)
 	{
+		$query = "update tAccounts set isActive = 1, ConfirmationDate = '2023-12-13' where Email = ? and ConfirmationKey = ?";
+		$params = [ $Email, $ConfirmationKey];
+		$this->execute ($query, 'ss', $params);
+
 		$query = "select * from tAccounts where Email = ? and ConfirmationKey = ?";
 		$params = [ $Email, $ConfirmationKey ];
 		$o = $this->get_account ($query, 'ss', $params);
@@ -249,7 +253,7 @@ class AccountDAO{
 			return null;
 		}
 
-		return $row;
+		return $o;
 	}
 
 	public function validatePasswordResetRequest ($Email): array
@@ -273,9 +277,16 @@ class AccountDAO{
 
 	public function requestPasswordReset ($Email)
 	{
-		$o;
+		$PasswordResetKey = $this->app->getRandomString(25);
+		$PasswordResetRequestDate = date('Y-m-d H:i');
 
-		/* TODO: accoutn password reset request with [$Email] */
+		$query = "update tAccounts set PasswordResetRequestDate = ?, PasswordResetKey = ? where Email = ?";
+		$params = [ $PasswordResetRequestDate, $PasswordResetKey, $Email];
+		$this->execute ($query, 'sss', $params);
+
+		$query = "select * from tAccounts where Email = ?";
+		$params = [ $Email ];
+		$o = $this->get_account ($query, 's', $params);
 
 		$this->warn(
 			event: 'user_updated:'.$Email.','.$Email.',password_reset',
@@ -360,14 +371,16 @@ class AccountDAO{
 	public function resetPassword (string $Email, string $HashedPassword, string $PasswordResetKey): Account
 	{
 		$query = "update tAccounts set HashedPassword = ?, PasswordResetDate = '2023-12-07', PasswordResetRequestDate = null, PasswordResetKey = null where Email = ? and PasswordResetKey = ?";
-		$params = [ $Email, $HashedPassword, $PasswordResetKey ];
+		$params = [ $HashedPassword, $Email, $PasswordResetKey ];
 		$this->execute ($query, 'sss', $params);
-
 
 		$this->info(
 			event: 'authn_password_change:'.$Email,
 			description: $Email.' successfully changed pw');
 
+		$query = "select * from tAccounts where Email = ?";
+		$params = [ $Email ];
+		$o = $this->get_account ($query, 's', $params);
 		return $o;
 	}
 
