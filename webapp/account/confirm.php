@@ -49,7 +49,7 @@ if (sizeof($_POST) > 0)
 			$app->logIn('Account', $account);
 
 			$email->sendConfirmedAccountNotice($Email);
-			$app->redirect('../app/indexphp');
+			$app->redirect('../app/index.php');
 		}
 	
 	}

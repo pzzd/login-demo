@@ -20,7 +20,9 @@ class AccountDAO{
 
 	public function __construct($app) {
 		$this->app = $app;
-		$this->loggingDir = __DIR__ . "/../../logs/";
+
+		$this->enableLogging();
+		$this->loggingDir = __DIR__ . "/../logs/";
 		$this->loggingFileName = 'account-log.csv';
 
 		$this->dbcreds = json_decode(file_get_contents('/Users/pezzutidyer/Sites/login-demo/credentials/mysql.json'));	
@@ -89,13 +91,15 @@ class AccountDAO{
 
 	public function create(string $Email, string $HashedPassword): Account
 	{
+		$ConfirmationKey = $this->app->getRandomString(25);
+
 		$query = "delete from tAccounts where Email = ? and isActive is null";
 		$params = [ $Email ];
 		$this->execute ($query, 's', $params);
 
-		$query = "insert into tAccounts (Email, HashedPassword) values (?,?)";
-		$params = [ $Email, $HashedPassword ];
-		$this->execute ($query, 'ss', $params);
+		$query = "insert into tAccounts (Email, HashedPassword, ConfirmationKey) values (?,?,?)";
+		$params = [ $Email, $HashedPassword, $ConfirmationKey];
+		$this->execute ($query, 'sss', $params);
 
 		$query = "select * from tAccounts where Email = ?";
 		$params = [ $Email ];
@@ -229,7 +233,7 @@ class AccountDAO{
 		$o = $this->get_account ($query, 'ss', $params);
 
 
-		if (is_null($o)
+		if (is_null($o))
 		{
 			$this->warn(
 				event: 'authn_login_fail:'.$Email,

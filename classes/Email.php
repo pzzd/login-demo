@@ -18,7 +18,7 @@ class Email {
 	{
 		$this->app = $app;
 		$this->enableLogging();
-		$this->loggingDir = __DIR__ . "/../../logs/";
+		$this->loggingDir = __DIR__ . "/../logs/";
 		$this->loggingFileName = 'email-log.csv';
 	}
 
