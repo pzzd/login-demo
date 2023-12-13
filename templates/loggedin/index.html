@@ -1,0 +1,12 @@
+{% extends "includes/layout.html" %}
+{% block title %}Welcome!{% endblock %}
+
+{% block content %}
+
+
+<p>You opened your account with email {{ Account.Email }} on {{ Account.CreateDate }}.</p>
+
+<p><a href='../'>Log out</a></p>
+
+
+{% endblock content %}
