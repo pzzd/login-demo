@@ -8,11 +8,13 @@
 {{ include('includes/errors.html') }}
 
 <form action="requestreset.php" method="post" accept-charset="iso-8859-1">
+	<fieldset>
+		<legend><strong>Send a request to reset your password</strong></legend>
+		<label for="Email">Email address</label>
+		<input name="Email" id="Email" type="email" /><br />
 
-<label for="Email">Email address</label>
-<input name="Email" id="Email" type="email" /><br />
-
-<button type="submit" id="RequestReset" value="RequestReset">Submit</button>
+		<button type="submit" id="RequestReset" value="RequestReset">Submit</button>
+	</fieldset>
 </form>
 
 {% endblock content %}

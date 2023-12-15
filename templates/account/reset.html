@@ -22,17 +22,20 @@
 
 	<div id='password-check-container'></div>
 
-	<form action="reset.php" method="post" accept-charset="iso-8859-1">
+	<form action="reset.php" method="post">
+		<fieldset>
+			<legend><strong>Reset your password</strong></legend>
 
-	<label for="Email">Email address</label>
-	<input name="Email" id="Email" type="email" /><br />
+			<label for="Email">Email address</label>
+			<input name="Email" id="Email" type="email" /><br />
 
-	<label for="Password">New password</label>
-	<input name="Password" id="Password" type="password" autocomplete="off" /><br />
+			<label for="Password">New password</label>
+			<input name="Password" id="Password" type="password" autocomplete="off" /><br />
 
-	<input name="PasswordScore" id="PasswordScore" type="hidden" /><br />
+			<input name="PasswordScore" id="PasswordScore" type="hidden" /><br />
 
-	<button type="submit" id="Reset" value="Reset">Save new password</button>
+			<button type="submit" id="Reset" value="Reset">Save new password</button>
+		</fieldset>
 	</form>
 
 {% endif %}

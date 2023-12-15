@@ -20,15 +20,18 @@
 	{% set errors = loginerrors %}
 	{{ include('includes/errors.html') }}
 
-<form action="confirm.php" method="post" accept-charset="iso-8859-1">
+<form action="confirm.php" method="post">
+	<fieldset>
+			<legend><strong>Confirm your account</strong></legend>
 
-<label for="Email">Email address</label>
-<input name="Email" id="Email" type="email" required /><br />
+		<label for="Email">Email address</label>
+		<input name="Email" id="Email" type="email" required /><br />
 
-<label for="Password">Password</label>
-<input name="Password" id="Password" type="password" autocomplete="off" required /><br />
+		<label for="Password">Password</label>
+		<input name="Password" id="Password" type="password" autocomplete="off" required /><br />
 
-<button type="submit" id="ConfirmAccount" value="ConfirmAccount">Confirm Your Account</button>
+		<button type="submit" id="ConfirmAccount" value="ConfirmAccount">Confirm Your Account</button>
+	</fieldset>
 </form>
 {% endif %}
 
