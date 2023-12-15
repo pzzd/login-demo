@@ -91,7 +91,7 @@ class Application {
 			$this->twig = new \Twig\Environment($loader, [ "charset" => "utf-8" ]);
 
 			$this->twig->addGlobal('base', $this->base());
-			$this->twig->addGlobal('WebAppName', 'Login Demo');
+			$this->twig->addGlobal('WebAppName', 'Initech Systems');
 			$this->twig->addGlobal('CacheBuster', '20230724');
 		}
 
