@@ -25,7 +25,7 @@ class AccountDAO{
 		$this->loggingDir = __DIR__ . "/../logs/";
 		$this->loggingFileName = 'account-log.csv';
 
-		$this->dbcreds = json_decode(file_get_contents('/Users/pezzutidyer/Sites/login-demo/credentials/mysql.json'));	
+		$this->dbcreds = json_decode(file_get_contents(__DIR__ .'/../credentials/mysql.json'));	
 
 	}
 
